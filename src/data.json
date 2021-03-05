@@ -1,0 +1,14 @@
+{
+    // "_id":  "604206ab54470b60a4969617",
+    "imageUrl": "https://cdn.webshopapp.com/shops/94414/files/52440074/flag-of-ukraine.jpg",
+    "videoUrl": "https://www.youtube.com/watch?v=fu6-L9CsYOo",
+    "currency": "UAH",
+    "ISOCode": "UA",
+    "capitalLocation": "Point",
+    "coordinates": ["50.663","49.521"],
+    "localizations": [{
+      "name":"en",
+      "capital":"Kyiv",
+      "description":"lorem"
+    }]
+}
