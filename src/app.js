@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cloudinary = require('cloudinary').v2;
+const bodyParser = require('body-parser');
 const multer = require('multer');
 const fs = require('fs').promises;
 const loader = multer({ dest: path.join(__dirname, 'tmp') });
@@ -20,6 +21,13 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(requestLogMiddleware);
+app.use(bodyParser.urlencoded({ extended: false }));
+
+cloudinary.config({
+  cloud_name: 'vinos',
+  api_key: '688261745794558',
+  api_secret: 'HLx688STyzXj7m2YIkqApamBYSY',
+});
 app.post('/', loader.single('avatar'), async function (req, res) {
   try {
     const result = await cloudinary.uploader.upload(req.file.path);
@@ -37,7 +45,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 const countryRouter = require('./modules/countries/country.router');
 
 app.use('/countries', countryRouter);
-
+app.use('/api/auth', require('./modules/auth/auth.routes'));
 app.use((req, res) => {
   res.status(StatusCodes.NOT_IMPLEMENTED).send(ReasonPhrases.NOT_IMPLEMENTED);
 });
